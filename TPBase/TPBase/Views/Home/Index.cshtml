@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>tp-10</title>
+</head>
+
+<body>
+
+    <script></script>
+    
+
+    <div class="series">
+    @for (int i = 0; i < ViewBag.detallePartido.Count; i++)
+        {            
+        <div class="card">
+            <img src="\img\Logos\@ViewBag.detallePartido[i].Logo" style="width:400px">
+            <div class="container">
+                <h2><b>@ViewBag.detallePartido[i].Nombre</b></h2>
+                <a class ="ono" href='@Url.Action("VerDetallePartido", new { idPartido = ViewBag.detallePartido[i].IdPartido})'>Ver más</a>
+            </div>
+        </div>    
+        }
+    </div>
+
+
+<div class="card">
+  <img src="img_avatar.png" alt="Avatar" style="width:100%">
+  <div class="container">
+    <h4><b>John Doe</b></h4> 
+    <p>Architect & Engineer</p> 
+  </div>
+</div>
+</body>
+
+</html>
