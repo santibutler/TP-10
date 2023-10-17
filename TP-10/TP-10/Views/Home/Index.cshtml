@@ -2,10 +2,11 @@
     ViewData["Title"] = "Home";
 }
 
-<h1>Que miramos hoy?</h1>
+<h1>FiloCine</h1><br>
 
 @foreach (Serie serie in ViewBag.listSeries)
 {
+  <div class = "contenedor">
         <div class="card">
             <h2 class="card-title"><b>@serie.Nombre</b></h2>
             <img src="@serie.ImagenSerie" alt="img" style="width:100%">
@@ -17,9 +18,11 @@
                 </div>
             </div>
         </div>
+  </div>
+  <br><br>
+
 }
 <!-- Modal -->
-<div class  ="container">
 <div class="modal fade" id="ModalSerie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -36,4 +39,12 @@
     </div>
   </div>
 </div>
-</div>
+
+<br><br>
+<footer>
+<h3>Créditos a Tamara Yael Dratler y Santiago Mateo Butler</h3>
+
+<br>
+<h3>Contactos a tamibuCompany@gmail.com</h3><br>
+
+</footer>
