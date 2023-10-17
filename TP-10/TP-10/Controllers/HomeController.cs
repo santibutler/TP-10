@@ -1,34 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using TP10.Models;
 
-namespace TP-10.Controllers;
+namespace Series.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+
     public IActionResult Index()
     {
-        ViewBag.Series = BD.MostrarSeries();
+        ViewBag.listSeries = BD.GetSeries(); 
         return View();
     }
 
-    //-------------------------------------------
-
-    public IActionResult Series(int id)
-    {
-        ViewBag.Serie = BD.MostrarInfoSerie();
-        return ViewBag.Series;
+    public List<Temporada> VerTemporadas(int IdSerie){
+        return ViewBag.response = BD.GetTemporadas(IdSerie);
+    }
+     public List<Actor> VerActores(int IdSerie){
+        return ViewBag.response = BD.GetActores(IdSerie);
+    }
+    public Serie VerInfo(int IdSerie){
+        return ViewBag.response = BD.GetInfoSerie(IdSerie);
     }
 
-
-    public IActionResult Actor(int id)
+    public IActionResult Privacy()
     {
-        ViewBag.Actores = BD.MostrarInfoActor();
-        return ViewBag.Actores;
+        return View();
     }
 
-    public IActionResult Temporada(int id)
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
     {
-        ViewBag.Temporadas = BD.MostrarInfoTemporada();
-        return ViewBag.Temporadas;
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
-    
 }

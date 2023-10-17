@@ -1,62 +1,39 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    ViewData["Title"] = "Home";
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Style.css">
-    <link rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>tp-10</title>
-</head>
+<h1>Que miramos hoy?</h1>
 
-<body>
-
-    <div class="series">
-    @for (int i = 0; i < ViewBag.MostrarInfoSerie.Count; i++)
-        {            
-        <div class="serie">
-            <img src="\img\series\@ViewBag.MostrarInfoSerie[i].ImagenSerie" style="width:400px">
+@foreach (Serie serie in ViewBag.listSeries)
+{
+        <div class="card">
+            <h2 class="card-title"><b>@serie.Nombre</b></h2>
+            <img src="@serie.ImagenSerie" alt="img" style="width:100%">
             <div class="container">
-                <h2><b>@ViewBag.MostrarInfoSerie[i].Nombre</b></h2>
-                <button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target = "#ModalSerie" onclick = "MostrarInfo(@ViewBag.MostrarInfoSerie[i].IdSerie)"
-                >Ver Más</button>
-                <button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target = "#ModalActor" onclick = "MostrarInfoActor(@ViewBag.MostrarInfoActor[i].IdActor)"
-                >Actores</button>
-                <button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target = "#ModalTemporadas" onclick = "MostrarInfoTemporadas(@ViewBag.MostrarInfoTemporada[i].IdTemporada)"
-                >Temporadas</button>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalSerie" onclick="MostrarTemporadas(@serie.IdSerie,'@serie.Nombre')">Temporadas</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalSerie" onclick="MostrarActores(@serie.IdSerie,'@serie.Nombre')">Actores</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalSerie" onclick="MostrarInfo(@serie.IdSerie,'@serie.Nombre')">Mas Info</button>
+                </div>
             </div>
-
-        </div>    
-        }
-    </div>
-
-    <div class="modal fade" id="ModalSerie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hiddens = "true">
+        </div>
+}
+<!-- Modal -->
+<div class  ="container">
+<div class="modal fade" id="ModalSerie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class = "modal-content">
+    <div class="modal-content">
       <div class="modal-header">
-        <h5 class = "modal-title" id = "NombreActor"></h5>
-        <h5 class = "modal-title" id = "NombreSerie"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden= "true">&times;</span>>
-        </button>
+        <h5 class="modal-title" id="Titulo"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <img class = "img-fluid" id="FotoSerie">
-        <div id = "SinopsisSerie"></div>
-        <div id="AnioInicio"></div>
-        <div id = "NumeroTemporada"></div>
-        <div id = "TituloTemporada"></div>
+      <div class="modal-body" id="Cuerpo">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
 </div>
-
-    
-</body>
-
-</html>
+</div>
